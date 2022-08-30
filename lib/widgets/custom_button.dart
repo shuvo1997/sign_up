@@ -23,6 +23,12 @@ class CustomButton extends StatelessWidget {
             if (!isValid) {
               return;
             }
+            if (!formController.isChecked.value) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Please check the checkbox')),
+              );
+              return;
+            }
             formController.formKey.currentState!.save();
             FieldList.printValues();
             ScaffoldMessenger.of(context).showSnackBar(

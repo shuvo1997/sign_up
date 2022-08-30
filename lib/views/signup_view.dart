@@ -54,6 +54,7 @@ class _MySignUpPageViewState extends State<MySignUpPageView> {
                 key: formController.formKey,
                 child: ListView.builder(
                     shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: FieldList.fields.length,
                     itemBuilder: (context, index) {
                       switch (FieldList.fields[index].widgetType) {
