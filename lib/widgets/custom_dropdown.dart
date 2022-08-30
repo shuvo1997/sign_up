@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sign_up/controllers/signup_controller.dart';
 
 class CustomDropdown extends StatelessWidget {
   final String label;
@@ -13,16 +15,12 @@ class CustomDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SignUpFormController formController = Get.find<SignUpFormController>();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       child: DropdownButtonFormField<String>(
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          if (value == null) {
-            return 'Please select a value';
-          }
-          return null;
-        },
+        validator: formController.dropDownValidation,
         decoration: InputDecoration(
             hintText: label,
             border:
@@ -37,6 +35,5 @@ class CustomDropdown extends StatelessWidget {
         onSaved: onSaved,
       ),
     );
-    ;
   }
 }

@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:sign_up/constants/field_lables.dart';
 
 class CustomTextField extends StatelessWidget {
-  String label;
-  TextInputType? keyboardType;
-  TextInputAction? textInputAction;
-  void Function(String?) onSaved;
-  CustomTextField(
+  final String label;
+  final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final void Function(String?) onSaved;
+  const CustomTextField(
       {Key? key,
       required this.label,
       this.keyboardType,
