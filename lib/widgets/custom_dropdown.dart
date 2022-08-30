@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sign_up/constants/field_list.dart';
 
 class CustomDropdown extends StatefulWidget {
   String label;
-  List<String> dropDownValues;
-  CustomDropdown({Key? key, required this.dropDownValues, required this.label})
+  List<String> dropDownList;
+  CustomDropdown({Key? key, required this.label, required this.dropDownList})
       : super(key: key);
 
   @override
@@ -19,31 +20,26 @@ class _CustomDropdownState extends State<CustomDropdown> {
   //     dropDownIntValues = widget.dropDownValues;
   //   }
   // }
-  @override
-  CustomDropdown get widget => super.widget;
-  String dropDownValue = '1';
+
   @override
   Widget build(BuildContext context) {
+    String dropDownValue = widget.dropDownList.first;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(10.0)),
-        child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-          value: dropDownValue,
-          icon: const Icon(Icons.arrow_drop_down),
-          items: widget.dropDownValues.map((String value) {
-            return DropdownMenuItem<String>(value: value, child: Text(value));
-          }).toList(),
-          onChanged: (String? newValue) {
-            setState(() {
-              dropDownValue = newValue!;
-            });
-          },
-        )),
+      child: DropdownButtonFormField<String>(
+        decoration: InputDecoration(
+            hintText: widget.label,
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+        icon: const Icon(Icons.arrow_drop_down),
+        items: widget.dropDownList.map((String value) {
+          return DropdownMenuItem<String>(value: value, child: Text(value));
+        }).toList(),
+        onChanged: (String? newValue) {
+          setState(() {
+            dropDownValue = newValue!;
+          });
+        },
       ),
     );
   }
