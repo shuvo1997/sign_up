@@ -4,6 +4,8 @@ import 'package:sign_up/widgets/custom_button.dart';
 import 'package:sign_up/widgets/custom_dropdown.dart';
 import 'package:sign_up/widgets/gradient_appbar.dart';
 import 'package:sign_up/widgets/text_field.dart';
+import '../constants/field_lables.dart';
+import '../constants/field_list.dart';
 import '../controllers/signup_controller.dart';
 import '../models/input_field.dart';
 
@@ -15,23 +17,23 @@ class MySignUpPageView extends StatefulWidget {
 }
 
 class _MySignUpPageViewState extends State<MySignUpPageView> {
-  List<InputField> fields = [
-    InputField(
-        labelName: 'Select Nationality', widgetType: WidgetType.DropDown),
-    InputField(labelName: 'Select Country', widgetType: WidgetType.DropDown),
-    InputField(
-        labelName: 'Mobile Number',
-        widgetType: WidgetType.TextField,
-        controller: TextEditingController()),
-    InputField(labelName: 'ID Type', widgetType: WidgetType.DropDown),
-    InputField(labelName: 'Email', widgetType: WidgetType.TextField),
-    InputField(labelName: 'Referral Code', widgetType: WidgetType.TextField),
-  ];
-
   List<int> dropDownIntItems = List.generate(10, (index) => index);
   List<String> dropDownStringItems = List.generate(10, (index) => ('$index'));
 
   List<InputField> rowWidgets = [];
+
+  void printValues() {
+    for (var val in fields) {
+      print(val.fieldValue);
+    }
+  }
+
+  // TODO: Save the data
+  void onSaved(String? value) {
+    for (int i = 0; i < fields.length; i++) {
+      fields[i].fieldValue = value;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +69,7 @@ class _MySignUpPageViewState extends State<MySignUpPageView> {
                         case WidgetType.TextField:
                           return CustomTextField(
                             label: fields[index].labelName,
+                            onSaved: onSaved,
                           );
                       }
                     }),
@@ -101,7 +104,8 @@ class _MySignUpPageViewState extends State<MySignUpPageView> {
                 ),
               ],
             ),
-            const CustomButton()
+            const CustomButton(),
+            TextButton(onPressed: printValues, child: Text('Print Values')),
           ],
         ),
       ),

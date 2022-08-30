@@ -8,8 +8,7 @@ enum WidgetType {
 class InputField {
   String labelName;
   WidgetType widgetType;
-  TextEditingController? controller = TextEditingController(text: "");
-
+  String? fieldValue;
   InputField(
-      {required this.labelName, required this.widgetType, this.controller});
+      {required this.labelName, required this.widgetType, this.fieldValue});
 }
