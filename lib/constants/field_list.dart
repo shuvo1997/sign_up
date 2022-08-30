@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../models/input_field.dart';
 import 'field_lables.dart';
 
@@ -22,21 +20,21 @@ class FieldList {
         widgetType: WidgetType.DropDown,
         dropDownValue: countryCodeDropDown),
     InputField(
-        labelName: FieldLabel.mobileFieldLabel,
-        widgetType: WidgetType.TextField,
-        controller: TextEditingController()),
+      labelName: FieldLabel.mobileFieldLabel,
+      widgetType: WidgetType.TextField,
+    ),
     InputField(
         labelName: FieldLabel.idFieldLabel,
         widgetType: WidgetType.DropDown,
         dropDownValue: idType),
     InputField(
-        labelName: FieldLabel.emailFieldLabel,
-        widgetType: WidgetType.TextField,
-        controller: TextEditingController()),
+      labelName: FieldLabel.emailFieldLabel,
+      widgetType: WidgetType.TextField,
+    ),
     InputField(
-        labelName: FieldLabel.referralFieldLabel,
-        widgetType: WidgetType.TextField,
-        controller: TextEditingController()),
+      labelName: FieldLabel.referralFieldLabel,
+      widgetType: WidgetType.TextField,
+    ),
   ];
 
   static void printValues() {

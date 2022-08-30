@@ -69,8 +69,10 @@ class _MySignUpPageViewState extends State<MySignUpPageView> {
                         case WidgetType.TextField:
                           return CustomTextField(
                             label: FieldList.fields[index].labelName,
-                            controller: FieldList.fields[index].controller!,
                             textInputAction: TextInputAction.next,
+                            onSaved: (String? val) {
+                              FieldList.fields[index].fieldValue = val;
+                            },
                           );
                       }
                     }),

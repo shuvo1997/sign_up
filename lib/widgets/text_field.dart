@@ -1,59 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sign_up/constants/field_lables.dart';
-import 'package:sign_up/constants/field_list.dart';
 
 class CustomTextField extends StatelessWidget {
   String label;
   TextInputType? keyboardType;
   TextInputAction? textInputAction;
-  TextEditingController controller;
-
+  void Function(String?) onSaved;
   CustomTextField(
       {Key? key,
       required this.label,
       this.keyboardType,
       this.textInputAction,
-      required this.controller})
+      required this.onSaved})
       : super(key: key);
 
-  void saveData() {
-    if (label == FieldLabel.mobileFieldLabel) {
-      for (var element in FieldList.fields) {
-        if (element.labelName == label) {
-          element.fieldValue = controller.text;
-        }
-      }
-      // FieldList.fields[2].fieldValue = controller.text;
-    }
-    if (label == FieldLabel.emailFieldLabel) {
-      for (var element in FieldList.fields) {
-        if (element.labelName == label) {
-          element.fieldValue = controller.text;
-        }
-      }
-    }
-    if (label == FieldLabel.referralFieldLabel) {
-      for (var element in FieldList.fields) {
-        if (element.labelName == label) {
-          element.fieldValue = controller.text;
-        }
-      }
-    }
-  }
+  // void saveData() {
+  //   if (label == FieldLabel.mobileFieldLabel) {
+  //     for (var element in FieldList.fields) {
+  //       if (element.labelName == label) {
+  //         element.fieldValue = controller.text;
+  //       }
+  //     }
+  //     // FieldList.fields[2].fieldValue = controller.text;
+  //   }
+  //   if (label == FieldLabel.emailFieldLabel) {
+  //     for (var element in FieldList.fields) {
+  //       if (element.labelName == label) {
+  //         element.fieldValue = controller.text;
+  //       }
+  //     }
+  //   }
+  //   if (label == FieldLabel.referralFieldLabel) {
+  //     for (var element in FieldList.fields) {
+  //       if (element.labelName == label) {
+  //         element.fieldValue = controller.text;
+  //       }
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
         child: TextFormField(
-          controller: controller,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          onFieldSubmitted: (text) {
-            // print(text);
-            // controller.clear();
-          },
-          onEditingComplete: saveData,
           validator: (value) {
             if (label == FieldLabel.mobileFieldLabel &&
                 (value == null || !value.isPhoneNumber)) {
@@ -71,6 +63,7 @@ class CustomTextField extends StatelessWidget {
           },
           keyboardType: keyboardType,
           textInputAction: textInputAction,
+          onSaved: onSaved,
           decoration: InputDecoration(
               hintText: label,
               border:
