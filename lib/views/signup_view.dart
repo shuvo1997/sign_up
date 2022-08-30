@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sign_up/widgets/custom_button.dart';
 import 'package:sign_up/widgets/custom_dropdown.dart';
-import 'package:sign_up/widgets/gradient_appbar.dart';
 import 'package:sign_up/widgets/text_field.dart';
 import '../constants/field_list.dart';
 import '../controllers/signup_controller.dart';
@@ -28,7 +27,7 @@ class _MySignUpPageViewState extends State<MySignUpPageView> {
           padding: EdgeInsets.only(top: 20),
           child: Icon(Icons.arrow_back_ios),
         ),
-        toolbarHeight: 100,
+        toolbarHeight: 80,
         title: const Padding(
           padding: EdgeInsets.only(top: 20),
           child: Text('Sign Up'),
@@ -63,6 +62,9 @@ class _MySignUpPageViewState extends State<MySignUpPageView> {
                             label: FieldList.fields[index].labelName,
                             dropDownList:
                                 FieldList.fields[index].dropDownValue!,
+                            onSaved: (String? val) {
+                              FieldList.fields[index].fieldValue = val;
+                            },
                           );
                         case WidgetType.TextField:
                           return CustomTextField(

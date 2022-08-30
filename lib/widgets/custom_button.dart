@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sign_up/constants/constants.dart';
+import 'package:sign_up/constants/field_list.dart';
 import 'package:sign_up/controllers/signup_controller.dart';
 
 class CustomButton extends StatelessWidget {
@@ -23,8 +24,9 @@ class CustomButton extends StatelessWidget {
               return;
             }
             formController.formKey.currentState!.save();
+            FieldList.printValues();
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Processing Data')),
+              const SnackBar(content: Text('Data Saved')),
             );
           },
           child: const Text(

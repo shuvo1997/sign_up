@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:sign_up/constants/field_list.dart';
 
 class CustomDropdown extends StatefulWidget {
   String label;
   List<String> dropDownList;
-  CustomDropdown({Key? key, required this.label, required this.dropDownList})
-      : super(key: key);
+  void Function(String?) onSaved;
+  CustomDropdown({
+    Key? key,
+    required this.label,
+    required this.dropDownList,
+    required this.onSaved,
+  }) : super(key: key);
 
   @override
   State<CustomDropdown> createState() => _CustomDropdownState();
@@ -23,10 +27,17 @@ class _CustomDropdownState extends State<CustomDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    String dropDownValue = widget.dropDownList.first;
+    String dropDownValue;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       child: DropdownButtonFormField<String>(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          if (value == null) {
+            return 'Please select a value';
+          }
+          return null;
+        },
         decoration: InputDecoration(
             hintText: widget.label,
             border:
@@ -36,10 +47,9 @@ class _CustomDropdownState extends State<CustomDropdown> {
           return DropdownMenuItem<String>(value: value, child: Text(value));
         }).toList(),
         onChanged: (String? newValue) {
-          setState(() {
-            dropDownValue = newValue!;
-          });
+          print(newValue);
         },
+        onSaved: widget.onSaved,
       ),
     );
   }
