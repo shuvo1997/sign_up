@@ -7,6 +7,7 @@ import 'package:sign_up/widgets/text_field.dart';
 import '../constants/field_list.dart';
 import '../controllers/signup_controller.dart';
 import '../models/input_field.dart';
+import '../constants/constants.dart';
 
 class MySignUpPageView extends StatefulWidget {
   const MySignUpPageView({Key? key}) : super(key: key);
@@ -21,11 +22,25 @@ class _MySignUpPageViewState extends State<MySignUpPageView> {
     SignUpFormController formController = Get.put(SignUpFormController());
 
     return Scaffold(
+      appBar: AppBar(
+        titleSpacing: 30,
+        leading: const Padding(
+          padding: EdgeInsets.only(top: 20),
+          child: Icon(Icons.arrow_back_ios),
+        ),
+        toolbarHeight: 100,
+        title: const Padding(
+          padding: EdgeInsets.only(top: 20),
+          child: Text('Sign Up'),
+        ),
+        flexibleSpace: Container(
+          decoration: linearBoxDecoration,
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const GradientAppbar(title: 'Sign Up'),
             const Padding(
               padding: EdgeInsets.only(
                 left: 10.0,
