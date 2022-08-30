@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:sign_up/views/signup_view.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   runApp(const MyApp());
 }
 
@@ -16,10 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: const AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-        child: MySignUpPageView(),
-      ),
+      home: const MySignUpPageView(),
     );
   }
 }

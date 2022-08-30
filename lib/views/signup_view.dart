@@ -1,8 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sign_up/widgets/custom_button.dart';
 import 'package:sign_up/widgets/custom_dropdown.dart';
 import 'package:sign_up/widgets/text_field.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../constants/field_list.dart';
 import '../controllers/signup_controller.dart';
 import '../models/input_field.dart';
@@ -41,10 +43,7 @@ class _MySignUpPageViewState extends State<MySignUpPageView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(
-              padding: EdgeInsets.only(
-                left: 10.0,
-                top: 10.0,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               child: Text('Enter Info for Registration'),
             ),
             MediaQuery.removePadding(
@@ -53,6 +52,7 @@ class _MySignUpPageViewState extends State<MySignUpPageView> {
               child: Form(
                 key: formController.formKey,
                 child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: FieldList.fields.length,
@@ -89,22 +89,35 @@ class _MySignUpPageViewState extends State<MySignUpPageView> {
                     },
                   ),
                 ),
-                Row(
-                  children: const [
-                    Text('Please accept  '),
-                    Text(
-                      'terms',
-                      style: TextStyle(color: Colors.pink),
-                    ),
-                    Text(
-                      ' and',
-                      // style: TextStyle(color: Colors.pink),
-                    ),
-                    Text(
-                      ' privacy policies',
-                      style: TextStyle(color: Colors.pink),
-                    ),
-                  ],
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      const TextSpan(
+                        text: 'Please accept ',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      const TextSpan(
+                        text: 'terms',
+                        style: TextStyle(
+                            color: Colors.pink, fontWeight: FontWeight.bold),
+                      ),
+                      const TextSpan(
+                        text: ' and',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      TextSpan(
+                        text: ' privacy policies',
+                        style: const TextStyle(
+                            color: Colors.pink, fontWeight: FontWeight.bold),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () async {
+                            String url = 'https://blog.logrocket.com';
+                            await launchUrl(Uri.parse(url),
+                                mode: LaunchMode.externalApplication);
+                          },
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
