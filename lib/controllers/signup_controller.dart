@@ -31,7 +31,7 @@ class SignUpFormController extends GetxController {
     return null;
   }
 
-  onCheckBoxChange(bool? checked) {
+  void onCheckBoxChange(bool? checked) {
     if (checked != null) {
       if (checked) {
         isChecked.value = true;
